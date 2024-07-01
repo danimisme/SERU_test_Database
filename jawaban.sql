@@ -5,12 +5,12 @@
 	JOIN classes ON students.class_id = classes.id
 	JOIN teachers ON classes.teacher_id = teachers.id;
 
-    2. Tampilkan daftar kelas yang diajar oleh guru yang sama.
-	SELECT teachers.name AS teacher_name, classes.name AS class_name
-	FROM classes
-	JOIN teachers ON classes.teacher_id = teachers.id
-	GROUP BY teachers.name
-	HAVING COUNT(classes.id) > 1;
+-- 2. Tampilkan daftar kelas yang diajar oleh guru yang sama.
+
+	SELECT teachers.name AS teacher_name, GROUP_CONCAT(classes.name SEPARATOR ', ') AS class_names
+    FROM classes
+    JOIN teachers ON classes.teacher_id = teachers.id
+    GROUP BY teachers.name;
 
 -- 3. buat query view untuk siswa, kelas, dan guru yang mengajar
 
